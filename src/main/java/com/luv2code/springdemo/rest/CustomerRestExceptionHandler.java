@@ -25,7 +25,20 @@ public class CustomerRestExceptionHandler {
 	}
 	
 	//ADD EXCEPTION HANDLER FOR ANY EXCEPTION - GENERIC
-	
+	@ExceptionHandler
+	public ResponseEntity<CustomerErrorResponse> handleException(Exception exc) {
+		
+		//CREATE CUSTOMERERRORREPONSE
+		CustomerErrorResponse error = new CustomerErrorResponse(
+				HttpStatus.BAD_REQUEST.value(),
+				exc.getMessage(),
+				System.currentTimeMillis()
+				);
+		
+		//RETURN RESPONSEENTITY
+		
+		return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+	}
 	
 	
 }
